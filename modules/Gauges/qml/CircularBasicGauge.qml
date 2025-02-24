@@ -18,33 +18,54 @@
  */
 
 import QtQuick
-import QtQuick.Controls
+import RoniaKit
 import RoniaKit.Gauges
 
 /*! ***********************************************************************************************
- * Circular Basic Gauge
+ * This is the abstract type of all gauges definitions
  * ************************************************************************************************/
-RoniaControl {
+Item {
     id: control
 
     /* Property Declarations
      * ****************************************************************************************/
 
+    //! Name
+    property string       name:         "Name"
+
+    //! Value
+    property double       value:        100.0
+
+    //! Outer radius
+    property real         outerRadius:  Math.min(control.width, control.height) * 0.5
+
+    //! Theme
+    property int          theme:        CommonDefinitions.Theme.Light
+
+    //! Gauge Type
+    property int          type
+
+    //! Range Control
+    property RangeControl rangeControl: RangeControl {}
+
+    //! Style
+    property Component  style: CircularBasicGaugeStyle {
+                        anchors.fill: parent
+                        rangeControl: control.rangeControl
+                        outerRadius: control.outerRadius
+                        theme: control.theme
+                        value: control.value
+                    }    
+
     /* Object Properties
      * ****************************************************************************************/
-    outerRadius: Math.min(control.width, control.height) * 0.5
-    type: RoniaControl.GaugeType.CircularBasic
     width: 250
     height: 250
 
     /* Children
      * ****************************************************************************************/
-    style: CircularBasicGaugeStyle {
+    Loader {
         anchors.fill: parent
-        rangeControl: control.rangeControl
-        outerRadius: control.outerRadius
-        theme: control.theme
-        value: control.value
+        sourceComponent: style
     }
-
 }

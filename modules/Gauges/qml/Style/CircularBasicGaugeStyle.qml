@@ -20,11 +20,13 @@
 import QtQuick 2.15
 import QtQuick.Controls
 import RoniaKit.Gauges
+import RoniaKit
 
 /*! ***********************************************************************************************
  * Circular basic Gauge Style
  * ************************************************************************************************/
-RoniaControlStyle {
+RoniaControlStyle
+{
     id: control
 
     /* Property Declarations
@@ -37,11 +39,13 @@ RoniaControlStyle {
 
     property bool                 digitalValueVisibility : true
 
-    property RangeControl         rangeControl;
+    property RangeControl         rangeControl : RangeControl{}
 
-    property real needleRotation: {
+    property real needleRotation:
+    {
         var percentage = (control.value - rangeControl.minimumValue) /
                          ( rangeControl.maximumValue -  rangeControl.minimumValue);
+
         rangeControl.startAngle + percentage *
                 Math.abs(rangeControl.endAngle -  rangeControl.startAngle);
     }
@@ -55,19 +59,21 @@ RoniaControlStyle {
      * ****************************************************************************************/
     FontLoader {id: webFont; source: "qrc:/RoniaKit/assets/fonts/fontsFree-Net-DS-DIGI-1.ttf" }
 
-    Component.onCompleted: {
-        backgroundMap[RoniaControl.Theme.Light] = "#ffffff"
-        backgroundMap[RoniaControl.Theme.Dark] = "#333333"
-        labelMap[RoniaControl.Theme.Light] = "black"
-        labelMap[RoniaControl.Theme.Dark] = "white"
-        majorTickmarkMap[RoniaControl.Theme.Dark] = "#e5e5e5"
-        majorTickmarkMap[RoniaControl.Theme.Light] = "#c8d0d0"
-        minorTickmarkMap[RoniaControl.Theme.Dark] = "#e5e5e5"
-        minorTickmarkMap[RoniaControl.Theme.Light] = "#c8d0d0"
-        needleMap[RoniaControl.Theme.Dark] =  "qrc:/RoniaKit/Gauges/assets/images/redNeedle2.png"
-        needleMap[RoniaControl.Theme.Light] = "qrc:/RoniaKit/Gauges/assets/images/redNeedle3.png"
-        needleKnobMap[RoniaControl.Theme.Dark] =  "#ff2c2c"
-        needleKnobMap[RoniaControl.Theme.Light] = "#ff6861"
+    Component.onCompleted:
+    {
+        backgroundMap[CommonDefinitions.Theme.Light] = "#ffffff"
+        backgroundMap[CommonDefinitions.Theme.Dark] = "#333333"
+        labelMap[CommonDefinitions.Theme.Light] = "black"
+        labelMap[CommonDefinitions.Theme.Dark] = "white"
+        majorTickmarkMap[CommonDefinitions.Theme.Dark] = "#e5e5e5"
+        majorTickmarkMap[CommonDefinitions.Theme.Light] = "#c8d0d0"
+        minorTickmarkMap[CommonDefinitions.Theme.Dark] = "#e5e5e5"
+        minorTickmarkMap[CommonDefinitions.Theme.Light] = "#c8d0d0"
+        needleMap[CommonDefinitions.Theme.Dark] =  "qrc:/RoniaKit/Gauges/assets/images/redNeedle2.png"
+        needleMap[CommonDefinitions.Theme.Light] = "qrc:/RoniaKit/Gauges/assets/images/redNeedle3.png"
+        needleKnobMap[CommonDefinitions.Theme.Dark] =  "#ff2c2c"
+        needleKnobMap[CommonDefinitions.Theme.Light] = "#ff6861"
+
         backgroundMapChanged();
         majorTickmarkMapChanged();
         minorTickmarkMapChanged();
@@ -283,6 +289,4 @@ RoniaControlStyle {
         anchors.centerIn: parent
         sourceComponent: foreground
     }
-
-
 }
