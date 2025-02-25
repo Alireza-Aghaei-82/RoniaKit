@@ -49,7 +49,7 @@ Item {
     property RangeControl rangeControl: RangeControl {}
 
     //! Style
-    property Component  style: CircularBasicGaugeStyle {
+    property Component  style: RoniaBasicGaugeStyle {
                         anchors.fill: parent
                         rangeControl: control.rangeControl
                         outerRadius: control.outerRadius
