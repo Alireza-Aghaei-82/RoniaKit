@@ -213,8 +213,7 @@ Item
     {
         id: majorTickLoader
 
-        visible: !overrideMajorTickmarks
-        active: rangeControl.majorTickVisible
+        active: !overrideMajorTickmarks && rangeControl.majorTickVisible
         width: control.majorInsetRadius * 2
         height: control.majorInsetRadius * 2
         anchors.centerIn: parent
@@ -259,8 +258,7 @@ Item
     //! Minor TickMark Loader
     Loader
     {
-        visible: !overrideMinorTickmarks
-        active: rangeControl.minorTickVisible
+        active: !overrideMinorTickmarks && rangeControl.minorTickVisible
         width: control.minorInsetRadius * 2
         height: control.minorInsetRadius * 2
         anchors.centerIn: parent
@@ -305,8 +303,7 @@ Item
     //! Label Loader
     Loader
     {
-        visible: !overrideTickLabels
-        active: rangeControl.labelVisible
+        active: !overrideTickLabels && rangeControl.labelVisible
         width: control.labelInsetRadius * 2
         height: control.labelInsetRadius * 2
         anchors.centerIn: parent
@@ -366,7 +363,7 @@ Item
     {
         id: needleLoader
 
-        visible: !overrideNeedle
+        active: !overrideNeedle
         sourceComponent: control.needle
 
         transform:
@@ -388,7 +385,7 @@ Item
     {
         id: foregroundLoader
 
-        visible: foregroundVisible
+        active: foregroundVisible
         width: outerRadius * 2
         height: outerRadius * 2
         anchors.centerIn: parent
